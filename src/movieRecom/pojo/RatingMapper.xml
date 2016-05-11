@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="RATING" >
+  <resultMap id="BaseResultMap" type="movieRecom.pojo.Rating" >
+    
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="MOVIE_ID" property="movieId" jdbcType="VARCHAR" />
+    <result column="RATING" property="rating" jdbcType="DECIMAL" />
+    <result column="RATING_DATE" property="ratingDate" jdbcType="TIMESTAMP" />
+    
+  </resultMap>
+  <insert id="insert" parameterType="Rating" >
+
+	insert into RATING_INFO (USER_ID, MOVIE_ID,RATING,RATING_DATE)
+	values
+	(#{userId,jdbcType=VARCHAR},
+	#{movieId,jdbcType=VARCHAR},
+	#{rating,jdbcType=DECIMAL},
+	#{ratingDate,jdbcType=TIMESTAMP}
+	)
+  </insert>
+  
+    <update id="update" parameterType="Rating" >
+
+	update RATING_INFO 
+	set RATING = #{rating,jdbcType=DECIMAL}
+	where	USER_ID = #{userId,jdbcType=VARCHAR} 
+	and MOVIE_ID= #{movieId,jdbcType=VARCHAR}
+  </update>
+  
+    <delete id="delete" parameterType="java.lang.Integer">
+		delete from RATING_INFO
+		where
+		ID = #{id,jdbcType=DECIMAL}
+	</delete>
+  
+	<select id="queryByUserIdRankTime" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		select *
+		from RATING_INFO
+		where USER_ID = #{userId,jdbcType=VARCHAR}
+		order by rating_date desc
+	</select>
+	
+		<select id="queryByUserIdRankRate" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		select *
+		from RATING_INFO
+		where USER_ID = #{userId,jdbcType=VARCHAR}
+		order by rating desc
+		
+	</select>
+	
+	<select id="queryByUserAndMovieId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+		select *
+		from RATING_INFO
+		where USER_ID = #{userId,jdbcType=VARCHAR} and MOVIE_ID= #{movieId,jdbcType=VARCHAR}
+		
+	</select>
+	
+  </mapper>

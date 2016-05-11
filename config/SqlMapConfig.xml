@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    
+    <!-- 类别名
+    <typeAliases>
+        <typeAlias type="com.icss.oa.pojo.Student" alias="Student"/>
+    </typeAliases>
+	 -->
+	<!--映射文件路径，可能会有多个mapper映射
+	<mappers>	
+		<mapper resource="com/icss/oa/pojo/StudentMapper.xml"/>		
+	</mappers>
+	 -->
+	 
+	 <typeAliases>
+        <typeAlias type="movieRecom.pojo.User" alias="User"/>
+        <typeAlias type="movieRecom.pojo.Rating" alias="Rating"/>
+        <typeAlias type="movieRecom.pojo.MovieDetails" alias="MovieDetails"/>
+    </typeAliases>
+	 <mappers>	
+		<mapper resource="movieRecom/pojo/UserMapper.xml"/>	
+		<mapper resource="movieRecom/pojo/RatingMapper.xml"/>
+		<mapper resource="movieRecom/pojo/MovieDetailsMapper.xml"/>		
+	</mappers>
+	 
+</configuration>

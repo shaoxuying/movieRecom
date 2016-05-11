@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="MOVIEDETAILS" >
+  <resultMap id="BaseResultMap" type="movieRecom.pojo.MovieDetails" >
+    
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="MOVIE_ID" property="movie_id" jdbcType="VARCHAR" />
+    <result column="MOVIE_TITLE" property="movie_title" jdbcType="VARCHAR" />
+    <result column="MOVIE_YEAR" property="movie_year" jdbcType="VARCHAR" />
+    <result column="MOVIE_POSTER" property="movie_poster" jdbcType="VARCHAR" />
+    <result column="MOVIE_IMDB_RATE" property="movie_imdb_rate" jdbcType="VARCHAR" />
+    <result column="MOVIE_LONG" property="movie_long" jdbcType="VARCHAR" />
+    <result column="MOVIE_STORYLINE" property="movie_storyline" jdbcType="BLOB" />
+    <result column="MOVIE_CONTENT_RATE" property="movie_content_rate" jdbcType="VARCHAR" />
+    <result column="MOVIE_SUMMARY" property="movie_summary" jdbcType="BLOB" />
+    
+  </resultMap>
+  <insert id="insert" parameterType="MovieDetails" >
+
+	insert into MOVIE_DETAILS (MOVIE_ID, MOVIE_TITLE,MOVIE_YEAR,MOVIE_POSTER,MOVIE_IMDB_RATE,MOVIE_LONG,MOVIE_STORYLINE,MOVIE_CONTENT_RATE,MOVIE_SUMMARY)
+	values
+	(#{movie_id,jdbcType=VARCHAR},
+	#{movie_title,jdbcType=VARCHAR},
+	#{movie_year,jdbcType=VARCHAR},
+	#{movie_poster,jdbcType=VARCHAR},
+	#{movie_imdb_rate,jdbcType=VARCHAR},
+	#{movie_long,jdbcType=VARCHAR},
+	#{movie_storyline,jdbcType=BLOB},
+	#{movie_content_rate,jdbcType=VARCHAR},
+	#{movie_summary,jdbcType=BLOB}
+	)
+  </insert>
+  
+  <insert id="insertWriters" parameterType="java.util.Map" >
+
+	insert into MOVIE_WRITERS (MOVIE_ID, MOVIE_WRITER)
+	values
+	(#{movie_id,jdbcType=VARCHAR},
+	#{movie_writer,jdbcType=VARCHAR}
+	)
+  </insert>
+  
+  <insert id="insertActors" parameterType="java.util.Map" >
+
+	insert into MOVIE_ACTORS (MOVIE_ID, MOVIE_ACTOR)
+	values
+	(#{movie_id,jdbcType=VARCHAR},
+	#{movie_actor,jdbcType=VARCHAR}
+	)
+  </insert>
+  
+  <insert id="insertKeywords" parameterType="java.util.Map" >
+
+	insert into MOVIE_KEYWORDS (MOVIE_ID, MOVIE_KEYWORD)
+	values
+	(#{movie_id,jdbcType=VARCHAR},
+	#{movie_keyword,jdbcType=VARCHAR}
+	)
+  </insert>
+  
+    <insert id="insertDirector" parameterType="java.util.Map" >
+
+	insert into MOVIE_DIRECTOR (MOVIE_ID, MOVIE_DIRECTOR)
+	values
+	(#{movie_id,jdbcType=VARCHAR},
+	#{movie_director,jdbcType=VARCHAR}
+	)
+  </insert>
+  
+    <insert id="insertGenres" parameterType="java.util.Map" >
+
+	insert into MOVIE_GENRES (MOVIE_ID, MOVIE_GENRE)
+	values
+	(#{movie_id,jdbcType=VARCHAR},
+	#{movie_genre,jdbcType=VARCHAR}
+	)
+  </insert>
+  
+  <select id="getMovieByMovieId" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		*
+		from MOVIE_DETAILS
+		where MOVIE_ID = #{movie_id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getWritersByMovieId" resultType="java.lang.String" parameterType="java.lang.String">
+		select MOVIE_WRITER
+		from MOVIE_WRITERS
+		where MOVIE_ID = #{movie_id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getActorsByMovieId" resultType="java.lang.String" parameterType="java.lang.String">
+		select  MOVIE_ACTOR
+		from MOVIE_ACTORS
+		where MOVIE_ID = #{movie_id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getKeywordsByMovieId" resultType="java.lang.String" parameterType="java.lang.String">
+		select MOVIE_KEYWORD
+		from MOVIE_KEYWORDS
+		where MOVIE_ID = #{movie_id,jdbcType=VARCHAR}
+	</select>
+	<select id="getDirectorByMovieId" resultType="java.lang.String" parameterType="java.lang.String">
+		select MOVIE_DIRECTOR
+		from MOVIE_DIRECTOR
+		where MOVIE_ID = #{movie_id,jdbcType=VARCHAR}
+	</select>
+	<select id="getGenresByMovieId" resultType="java.lang.String" parameterType="java.lang.String">
+		select MOVIE_GENRE
+		from MOVIE_GENRES
+		where MOVIE_ID = #{movie_id,jdbcType=VARCHAR}
+	</select>
+
+  </mapper>
